@@ -23,7 +23,7 @@ async function getATask(req, res) {
   try {
     const task = await Task.findOne({ _id: taskId });
     if (!task) return res.status(404).json({ msg: "task does not exist" });
-    return res.status(200).json(task);
+    return res.status(200).json({ task });
   } catch (err) {
     return res.status(500).json({ msg: err });
   }
@@ -37,7 +37,7 @@ async function updateATask(req, res) {
       runValidators: true,
     });
     const task = await Task.findOne({ _id: taskId });
-    return res.status(201).json(task);
+    return res.status(201).json({ task });
   } catch (err) {
     return res.status(500).json({ msg: err });
   }

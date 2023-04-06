@@ -1,10 +1,13 @@
 const express = require("express");
+const path = require("path");
 require("dotenv").config();
 const mongoose = require("mongoose");
 
 const tasksRouter = require("./routes/tasks.routes");
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 
@@ -19,8 +22,8 @@ mongoose.connection.on("open", () => {
 });
 
 mongoose.connection.on("error", () => {
-    console.log('could not connect to mongo database')
-})
+  console.log("could not connect to mongo database");
+});
 
 async function startServer() {
   await mongoose.connect(MONGO_URL);
