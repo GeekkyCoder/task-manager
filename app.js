@@ -4,6 +4,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 const tasksRouter = require("./routes/tasks.routes");
+const notFound = require("./middlewares/not-found");
 
 const app = express();
 
@@ -16,6 +17,8 @@ const PORT = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;
 
 app.use("/api/v1/tasks", tasksRouter);
+
+app.use(notFound)
 
 mongoose.connection.on("open", () => {
   console.log(" mongodb conncted successfully");
