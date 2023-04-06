@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 
 const tasksRouter = require("./routes/tasks.routes");
 const notFound = require("./middlewares/not-found");
+const customErrorHandler = require("./middlewares/custom-error-handler");
 
 const app = express();
 
@@ -19,6 +20,8 @@ const MONGO_URL = process.env.MONGO_URL;
 app.use("/api/v1/tasks", tasksRouter);
 
 app.use(notFound)
+
+app.use(customErrorHandler)
 
 mongoose.connection.on("open", () => {
   console.log(" mongodb conncted successfully");
